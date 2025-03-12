@@ -2,7 +2,6 @@ package org.owencarter.mediaplayer;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.MediaPlayer;
 
@@ -15,14 +14,14 @@ public class PlaybackControls extends HBox {
         playPause.setGraphic(makePathFromSvg("playbutton.svg"));
         playPause.setPrefWidth(100);
         playPause.setDisable(false);
-        playPause.setOnAction(e -> {
+        playPause.setOnAction(_ -> {
             if (mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING) {
                 mediaPlayer.play();
             } else {
                 mediaPlayer.pause();
             }
         });
-        mediaPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
+        mediaPlayer.statusProperty().addListener((_, _, newValue) -> {
             if (newValue != MediaPlayer.Status.PLAYING) {
                 playPause.setGraphic(makePathFromSvg("playbutton.svg"));
             } else {
@@ -34,17 +33,17 @@ public class PlaybackControls extends HBox {
         skipNext.setGraphic(makePathFromSvg("skipnext.svg"));
         skipNext.setPrefWidth(100);
         skipNext.setDisable(true);
-        skipNext.setOnAction(e -> mediaPlayer.play());
+        skipNext.setOnAction(_ -> mediaPlayer.play());
 
         Button skipPrevious = new Button();
         skipPrevious.setGraphic(makePathFromSvg("skipprevious.svg"));
         skipPrevious.setPrefWidth(100);
         skipPrevious.setDisable(true);
-        skipPrevious.setOnAction(e -> mediaPlayer.play());
+        skipPrevious.setOnAction(_ -> mediaPlayer.play());
 
         ProgressBar progressBar = new ProgressBar();
         progressBar.setPrefWidth(250);
-        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+        mediaPlayer.currentTimeProperty().addListener((_, _, newValue) -> {
             progressBar.setProgress(newValue.toMillis() / mediaPlayer.getTotalDuration().toMillis());
         });
 
