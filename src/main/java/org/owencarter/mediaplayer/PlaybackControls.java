@@ -32,8 +32,8 @@ public class PlaybackControls extends HBox {
         Button skipNext = new Button();
         skipNext.setGraphic(makePathFromSvg("skipnext.svg"));
         skipNext.setPrefWidth(100);
-        skipNext.setDisable(true);
-        skipNext.setOnAction(_ -> mediaPlayer.play());
+        skipNext.setDisable(false);
+        skipNext.setOnAction(_ -> System.out.println(mediaPlayer.getMedia().getMetadata()));
 
         Button skipPrevious = new Button();
         skipPrevious.setGraphic(makePathFromSvg("skipprevious.svg"));
